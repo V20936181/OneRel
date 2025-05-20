@@ -34,7 +34,7 @@ This repository contians the source code and datasets for the paper: **OneRel: J
 
     Modify the `model_name` (line 48) to the name of the saved model, and run 
     ```shell
-    python train.py --dataset=BioRED --batch_size=8 --rel_num=8
+    python train.py --dataset=BioRED --batch_size=8 --rel_num=8 --max_epoch=1
     ```
 
     The extracted results will be save in `result/BioRED`.
