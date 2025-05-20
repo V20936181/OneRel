@@ -23,20 +23,10 @@ This repository contians the source code and datasets for the paper: **OneRel: J
 
 4. **Train the model (take NYT as an example)**
 
-    Modify the second dim of `batch_triple_matrix` in `data_loader.py` to the number of relations, and run
+    Modify the second dim of `batch_triple_matrix` in `data_loader.py` to the number of relations in BioRed, and run
 
     ```shell
-    python train.py --dataset=NYT --batch_size=8 --rel_num=24 
+    python train.py --dataset=BioRED --batch_size=8 --rel_num=8
     ```
     The model weights with best performance on dev dataset will be stored in `checkpoint/NYT/`
-
-5. **Evaluate on the test set (take NYT as an example)**
-
-    Modify the `model_name` (line 48) to the name of the saved model, and run 
-    ```shell
-    python train.py --dataset=BioRED --batch_size=8 --rel_num=8 --max_epoch=1
-    ```
-
-    The extracted results will be save in `result/BioRED`.
-
 
