@@ -94,28 +94,28 @@ class Framework(object):
                 data = train_data_prefetcher.next()
             print("total time {}".format(time.time() - epoch_start_time))
 
-            if epoch > 20 and (epoch + 1) % self.config.test_epoch == 0:
-                eval_start_time = time.time()
-                model.eval()
-                # call the test function
-                precision, recall, f1_score = self.test(test_data_loader, model, current_f1=best_f1_score, output=self.config.result_save_name)
-                
-                self.logging('epoch {:3d}, eval time: {:5.2f}s, f1: {:4.3f}, precision: {:4.3f}, recall: {:4.3f}'.
-                             format(epoch, time.time() - eval_start_time, f1_score, precision, recall))
+            # if epoch > 20 and (epoch + 1) % self.config.test_epoch == 0:
+            eval_start_time = time.time()
+            model.eval()
+            # call the test function
+            precision, recall, f1_score = self.test(test_data_loader, model, current_f1=best_f1_score, output=self.config.result_save_name)
 
-                if f1_score > best_f1_score:
-                    best_f1_score = f1_score
-                    best_epoch = epoch
-                    best_precision = precision
-                    best_recall = recall
-                    self.logging("saving the model, epoch: {:3d}, precision: {:4.3f}, recall: {:4.3f}, best f1: {:4.3f}".
-                                 format(best_epoch, best_precision, best_recall, best_f1_score))
-                    # save the best model
-                    path = os.path.join(self.config.checkpoint_dir, self.config.model_save_name)
-                    if not self.config.debug:
-                        torch.save(ori_model.state_dict(), path)
+            self.logging('epoch {:3d}, eval time: {:5.2f}s, f1: {:4.3f}, precision: {:4.3f}, recall: {:4.3f}'.
+                         format(epoch, time.time() - eval_start_time, f1_score, precision, recall))
 
-                model.train()
+            if f1_score > best_f1_score:
+                best_f1_score = f1_score
+                best_epoch = epoch
+                best_precision = precision
+                best_recall = recall
+                self.logging("saving the model, epoch: {:3d}, precision: {:4.3f}, recall: {:4.3f}, best f1: {:4.3f}".
+                             format(best_epoch, best_precision, best_recall, best_f1_score))
+                # save the best model
+                path = os.path.join(self.config.checkpoint_dir, self.config.model_save_name)
+                if not self.config.debug:
+                    torch.save(ori_model.state_dict(), path)
+
+            model.train()
 
             # manually release the unused cache
             torch.cuda.empty_cache()

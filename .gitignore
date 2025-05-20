@@ -1,7 +1,10 @@
-checkpoint
-pre_trained_bert
-result
+checkpoint/*
+!checkpoint/place_holder
+pre_trained_bert/*
+result/*
+!result/place_holder
 .ipynb_checkpoints/
-log
+log/*
+!log/place_holder
 */__pycache__/
 __pycache__/

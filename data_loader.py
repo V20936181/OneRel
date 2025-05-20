@@ -102,7 +102,7 @@ def re_collate_fn(batch):
     batch_masks = torch.LongTensor(cur_batch_len, max_text_len).zero_()
     batch_loss_masks = torch.LongTensor(cur_batch_len, 1, max_text_len, max_text_len).zero_()
     # if use WebNLG_star, modify 24 to 171
-    batch_triple_matrix = torch.LongTensor(cur_batch_len, 24, max_text_len, max_text_len).zero_()
+    batch_triple_matrix = torch.LongTensor(cur_batch_len, 8, max_text_len, max_text_len).zero_()
 
     for i in range(cur_batch_len):
         batch_token_ids[i, :text_len[i]].copy_(torch.from_numpy(token_ids[i]))
