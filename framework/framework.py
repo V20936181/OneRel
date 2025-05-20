@@ -121,8 +121,8 @@ class Framework(object):
             torch.cuda.empty_cache()
 
         self.logging("finish training")
-        self.logging("best epoch: {:3d}, precision: {:4.3f}, recall: {:4.3}, best f1: {:4.3f}, total time: {:5.2f}s".
-                     format(best_epoch, best_precision, best_recall, best_f1_score, time.time() - init_time))
+        self.logging("best epoch: {:3d}, precision: {:4.3f}, recall: {:4.3f}, best f1: {:4.3f}, total time: {:5.2f}s".
+             format(best_epoch, best_precision, best_recall, best_f1_score, time.time() - init_time))
 
     def test(self, test_data_loader, model, current_f1, output=True):
         
