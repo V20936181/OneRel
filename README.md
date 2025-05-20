@@ -21,9 +21,9 @@ This repository contians the source code and datasets for the paper: **OneRel: J
    ```
 
 
-4. **Train the model (take NYT as an example)**
+4. **Train the model**
 
-    Modify the second dim of `batch_triple_matrix` in `data_loader.py` to the number of relations in BioRed, and run
+    Modify the second dim of `batch_triple_matrix` in `data_loader.py` to the number of relations in BioRed dataset, and run
 
     ```shell
     python train.py --dataset=BioRED --batch_size=8 --rel_num=8  --max_epoch=4
