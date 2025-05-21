@@ -6,7 +6,8 @@ from utils import get_tokenizer
 import numpy as np
 from random import choice
 
-tokenizer = get_tokenizer('pre_trained_bert/vocab.txt')
+# pass use_pubmed_bert = True only if training on BioRED
+tokenizer = get_tokenizer('pre_trained_bert/vocab.txt', use_pubmed_bert=True)
 tag_file = 'data/tag.txt'
 
 def find_head_idx(source, target):

@@ -8,6 +8,7 @@ class RelModel(nn.Module):
         super(RelModel, self).__init__()
         self.config = config
         self.bert_dim = config.bert_dim
+        # Do not use bert-base-cased for encoding when training on BioRED dataset
         # self.bert_encoder = BertModel.from_pretrained("bert-base-cased", cache_dir='./pre_trained_bert')
         self.bert_encoder = BertModel.from_pretrained("NeuML/pubmedbert-base-embeddings", cache_dir='./pre_trained_bert')
         self.relation_matrix = nn.Linear(self.bert_dim * 3, self.config.rel_num * self.config.tag_size)

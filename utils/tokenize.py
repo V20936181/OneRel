@@ -8,11 +8,11 @@ from transformers import AutoTokenizer
 The HBTokenizer is critical to OneRel.
 """
 
-class HBBioBertTokenizer:
+class HBPubMedBertTokenizer:
     def __init__(self, cased=True):
         from transformers import AutoTokenizer
 
-        self.tokenizer = AutoTokenizer.from_pretrained("dmis-lab/biobert-base-cased-v1.1")
+        self.tokenizer = AutoTokenizer.from_pretrained("NeuML/pubmedbert-base-embeddings")
         self._cased = cased
 
     def _normalize(self, text):
@@ -62,11 +62,13 @@ class HBTokenizer(Tokenizer):
         return tokens
 
 
-def get_tokenizer(vocab_path):
+def get_tokenizer(vocab_path, use_pubmed_bert = False):
     token_dict = {}
     with codecs.open(vocab_path, 'r', 'utf8') as reader:
         for line in reader:
             token = line.strip()
             token_dict[token] = len(token_dict)
-    return HBBioBertTokenizer(token_dict)
-    # return HBTokenizer(token_dict)
+    if(use_pubmed_bert):
+        return HBPubMedBertTokenizer(token_dict)
+    else:
+        return HBTokenizer(token_dict)
